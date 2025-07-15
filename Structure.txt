@@ -1,0 +1,40 @@
+iia-resources/
+├── README.md
+├── .github/
+│   └── workflows/
+│       └── validate-standards.yml
+├── standards/
+│   ├── 1000-series/
+│   │   ├── 1100-independence.md
+│   │   ├── 1110-organizational-independence.md
+│   │   ├── 1120-individual-objectivity.md
+│   │   └── 1130-impairment-independence.md
+│   ├── 2000-series/
+│   │   ├── 2010-planning.md
+│   │   ├── 2120-risk-management.md
+│   │   ├── 2200-engagement-planning.md
+│   │   └── 2400-communicating-results.md
+│   └── index.md
+├── guidance/
+│   ├── ippf-framework.md
+│   ├── coso-integration.md
+│   ├── ethics-code.md
+│   └── implementation/
+│       ├── risk-assessment-guidance.md
+│       └── reporting-best-practices.md
+├── topics/
+│   ├── risk-assessment.md
+│   ├── internal-controls.md
+│   ├── audit-planning.md
+│   ├── cybersecurity-auditing.md
+│   └── esg-auditing.md
+├── glossary/
+│   ├── definitions.md
+│   └── acronyms.md
+├── templates/
+│   ├── audit-program-template.md
+│   ├── workpaper-template.md
+│   └── report-template.md
+└── updates/
+    ├── 2024-changes.md
+    └── 2025-changes.md
