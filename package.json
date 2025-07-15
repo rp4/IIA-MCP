@@ -22,6 +22,9 @@
     "typescript": "^5.0.0",
     "ts-node": "^10.9.0"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "keywords": ["mcp", "iia", "internal-audit", "ai", "claude"],
   "author": "Research Project",
   "license": "MIT"
