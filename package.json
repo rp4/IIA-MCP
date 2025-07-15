@@ -1,0 +1,28 @@
+{
+  "name": "iia-mcp-server",
+  "version": "1.0.0",
+  "description": "Model Context Protocol server for Institute of Internal Auditors resources",
+  "main": "iia_mcp_server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node iia_mcp_server.js",
+    "scrape": "npx ts-node scraper.ts",
+    "dev": "npx ts-node iia_mcp_server.ts",
+    "vercel-build": "echo 'Vercel will handle TypeScript compilation'",
+    "deploy": "vercel --prod",
+    "preview": "vercel"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0",
+    "@vercel/node": "^3.0.0",
+    "marked": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0"
+  },
+  "keywords": ["mcp", "iia", "internal-audit", "ai", "claude"],
+  "author": "Research Project",
+  "license": "MIT"
+}

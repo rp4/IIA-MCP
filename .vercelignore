@@ -1,0 +1,48 @@
+# Vercel ignore file
+# Files and directories to exclude from deployment
+
+# Development files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime files
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build files (Vercel handles these)
+dist/
+build/
+out/
+
+# Dependencies (Vercel installs these)
+node_modules/
+
+# Original MCP server (not needed for web deployment)
+iia_mcp_server.ts
+iia_mcp_server.js
+
+# Scraper (development tool only)
+scraper.ts
+scraper.js
+
+# Local PDF storage
+pdfs/
+
+# Git files
+.git/
+.gitignore
+
+# Documentation (include in deployment for reference)
+# README.md
+# DEPLOYMENT.md

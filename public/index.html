@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIA MCP Server - API Documentation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+        }
+        .card h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        .endpoint {
+            background: #f8f9fa;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 0.5rem 0;
+            border-left: 3px solid #28a745;
+        }
+        .method {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        .get { background-color: #d1ecf1; color: #0c5460; }
+        .post { background-color: #d4edda; color: #155724; }
+        .demo-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .demo-button {
+            background: #667eea;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .demo-button:hover {
+            background: #5a6fd8;
+        }
+        .result {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            border-top: 1px solid #ddd;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏛️ IIA MCP Server</h1>
+        <p>Model Context Protocol server for Institute of Internal Auditors resources</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>📚 Resources API</h3>
+            <p>Access all IIA standards, guidance, and topics</p>
+            <div class="endpoint">
+                <span class="method get">GET</span>/api/resources
+            </div>
+            <p>Returns a list of all available IIA resources with metadata.</p>
+        </div>
+
+        <div class="card">
+            <h3>🔍 Search API</h3>
+            <p>Search through IIA documents by keywords</p>
+            <div class="endpoint">
+                <span class="method get">GET</span>/api/search?q=risk&category=standards
+            </div>
+            <p>Search parameters: <code>q</code> (query), <code>category</code> (optional), <code>limit</code> (optional)</p>
+        </div>
+
+        <div class="card">
+            <h3>📋 Standards API</h3>
+            <p>Get specific IIA standards details</p>
+            <div class="endpoint">
+                <span class="method get">GET</span>/api/standards?standard=2120
+            </div>
+            <p>Get all standards or specify a standard number (e.g., 1100, 2120)</p>
+        </div>
+
+        <div class="card">
+            <h3>✅ Compliance API</h3>
+            <p>Validate scenarios against IIA standards</p>
+            <div class="endpoint">
+                <span class="method post">POST</span>/api/compliance
+            </div>
+            <p>Send a scenario in the request body to get compliance assessment.</p>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h2>🚀 Live API Demo</h2>
+        <p>Try out the APIs below:</p>
+        
+        <button class="demo-button" onclick="testEndpoint('/api/resources', 'GET')">
+            Get All Resources
+        </button>
+        
+        <button class="demo-button" onclick="testEndpoint('/api/search?q=risk%20management&limit=3', 'GET')">
+            Search "Risk Management"
+        </button>
+        
+        <button class="demo-button" onclick="testEndpoint('/api/standards?standard=2120', 'GET')">
+            Get Standard 2120
+        </button>
+        
+        <button class="demo-button" onclick="testCompliance()">
+            Test Compliance Check
+        </button>
+        
+        <div id="result" class="result" style="display: none;"></div>
+    </div>
+
+    <div class="demo-section">
+        <h2>📖 Usage Examples</h2>
+        
+        <h3>JavaScript/TypeScript</h3>
+        <pre><code>// Search for documents
+const searchResults = await fetch('/api/search?q=cybersecurity&category=topics')
+  .then(res => res.json());
+
+// Get a specific standard
+const standard = await fetch('/api/standards?standard=1120')
+  .then(res => res.json());
+
+// Validate compliance
+const compliance = await fetch('/api/compliance', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    scenario: 'Our audit team reports directly to the CFO and has no access to the board.',
+    standards: ['1110', '1120']
+  })
+}).then(res => res.json());</code></pre>
+
+        <h3>cURL Examples</h3>
+        <pre><code># Search documents
+curl "https://your-domain.vercel.app/api/search?q=independence&limit=5"
+
+# Get standard details
+curl "https://your-domain.vercel.app/api/standards?standard=1100"
+
+# Compliance validation
+curl -X POST "https://your-domain.vercel.app/api/compliance" \
+  -H "Content-Type: application/json" \
+  -d '{"scenario": "We conduct risk assessments annually", "standards": ["2010", "2120"]}'</code></pre>
+    </div>
+
+    <div class="footer">
+        <p>🔗 <strong>IIA MCP Server</strong> - Deployed on Vercel | 
+        <a href="https://github.com/your-repo/iia-mcp-server" target="_blank">GitHub</a> | 
+        <a href="https://www.theiia.org" target="_blank">IIA Official Site</a></p>
+        <p>For MCP integration, use this server as a resource provider in your Claude Code or other MCP-compatible tools.</p>
+    </div>
+
+    <script>
+        async function testEndpoint(endpoint, method = 'GET', body = null) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = 'Loading...';
+
+            try {
+                const options = {
+                    method,
+                    headers: { 'Content-Type': 'application/json' }
+                };
+                
+                if (body) {
+                    options.body = JSON.stringify(body);
+                }
+
+                const response = await fetch(endpoint, options);
+                const data = await response.json();
+                
+                resultDiv.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        async function testCompliance() {
+            const scenario = {
+                scenario: "Our internal audit function reports to the CFO and conducts risk-based audits quarterly. We have documented audit procedures and communicate findings to management.",
+                standards: ["1110", "2010", "2400"]
+            };
+            
+            await testEndpoint('/api/compliance', 'POST', scenario);
+        }
+    </script>
+</body>
+</html>
