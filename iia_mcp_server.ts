@@ -21,7 +21,8 @@ interface DocumentMetadata {
   category: string;
   standardNumber?: string;
   lastUpdated: string;
-  version: string;
+  url: string;
+  scrapedAt: string;
   tags: string[];
 }
 
@@ -66,7 +67,7 @@ class IIAResourceServer {
   }
 
   private async scanDocuments() {
-    const categories = ['standards', 'guidance', 'topics', 'glossary'];
+    const categories = ['standards', 'guidance', 'topics', 'glossary', 'templates', 'updates'];
     
     for (const category of categories) {
       const categoryPath = path.join(REPO_PATH, category);
@@ -116,7 +117,10 @@ class IIAResourceServer {
     const lines = content.split('\n');
     let metadata: Partial<DocumentMetadata> = {
       tags: [],
-      version: '1.0.0'
+      title: 'Untitled',
+      url: '',
+      lastUpdated: new Date().toISOString(),
+      scrapedAt: new Date().toISOString()
     };
 
     // Look for YAML frontmatter
@@ -132,11 +136,17 @@ class IIAResourceServer {
             case 'title':
               metadata.title = value.replace(/['"]/g, '');
               break;
-            case 'standard':
+            case 'standard_number':
               metadata.standardNumber = value.replace(/['"]/g, '');
               break;
-            case 'version':
-              metadata.version = value.replace(/['"]/g, '');
+            case 'url':
+              metadata.url = value.replace(/['"]/g, '');
+              break;
+            case 'last_updated':
+              metadata.lastUpdated = value.replace(/['"]/g, '');
+              break;
+            case 'scraped_at':
+              metadata.scrapedAt = value.replace(/['"]/g, '');
               break;
             case 'tags':
               metadata.tags = value.split(',').map(t => t.trim().replace(/['"]/g, ''));
