@@ -18,7 +18,7 @@ async function searchDocuments(
   limit: number = 10
 ): Promise<SearchResult[]> {
   const results: SearchResult[] = [];
-  const REPO_PATH = './iia-resources';
+  const REPO_PATH = path.join(process.cwd(), 'iia-resources');
   const categories = category ? [category] : ['standards', 'guidance', 'topics', 'glossary', 'templates'];
   
   for (const cat of categories) {

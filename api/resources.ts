@@ -14,7 +14,7 @@ interface DocumentMetadata {
 
 async function getDocumentIndex(): Promise<Map<string, DocumentMetadata>> {
   const documentIndex = new Map<string, DocumentMetadata>();
-  const REPO_PATH = './iia-resources';
+  const REPO_PATH = path.join(process.cwd(), 'iia-resources');
   const categories = ['standards', 'guidance', 'topics', 'glossary', 'templates', 'updates'];
   
   for (const category of categories) {

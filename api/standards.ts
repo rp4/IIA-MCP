@@ -13,7 +13,7 @@ interface StandardDetails {
 }
 
 async function getStandardDetails(standardNumber: string): Promise<StandardDetails | null> {
-  const REPO_PATH = './iia-resources';
+  const REPO_PATH = path.join(process.cwd(), 'iia-resources');
   const standardsPath = path.join(REPO_PATH, 'standards');
   
   // Try to find the standard in both 1000 and 2000 series
