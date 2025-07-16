@@ -48,3 +48,14 @@ pdfs/
 # TypeScript compilation outputs (will be generated)
 iia_mcp_server.js
 scraper.js
+mcp-bridge.js
+
+# Test and development files
+local-test-server.js
+*test*.js
+*debug*.js
+
+# Duplicate config files  
+claude-desktop-simple.json
+claude-desktop-config-*.json
+!claude-desktop-config.json

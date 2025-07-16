@@ -2,7 +2,7 @@
   "mcpServers": {
     "iia-resources": {
       "command": "node",
-      "args": ["/path/to/your/IIA-MCP/mcp-bridge.js"],
+      "args": ["/home/p472/IIA-MCP/mcp-bridge-standalone.js"],
       "env": {
         "IIA_API_BASE": "https://iia-mcp.vercel.app"
       }
