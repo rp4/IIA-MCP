@@ -194,22 +194,62 @@ const compliance = await fetch('/api/compliance', {
 
         <h3>cURL Examples</h3>
         <pre><code># Search documents
-curl "https://your-domain.vercel.app/api/search?q=independence&limit=5"
+curl "https://iia-mcp.vercel.app/api/search?q=independence&limit=5"
 
 # Get standard details
-curl "https://your-domain.vercel.app/api/standards?standard=1100"
+curl "https://iia-mcp.vercel.app/api/standards?standard=1100"
 
 # Compliance validation
-curl -X POST "https://your-domain.vercel.app/api/compliance" \
+curl -X POST "https://iia-mcp.vercel.app/api/compliance" \
   -H "Content-Type: application/json" \
   -d '{"scenario": "We conduct risk assessments annually", "standards": ["2010", "2120"]}'</code></pre>
     </div>
 
+    <div class="demo-section">
+        <h2>🔗 Claude Desktop Integration</h2>
+        <p>To use this IIA MCP server with Claude Desktop:</p>
+        
+        <h3>1. Download the MCP Bridge</h3>
+        <p>Download <code>mcp-bridge-standalone.js</code> from the GitHub repository to your local machine.</p>
+        
+        <h3>2. Add to Claude Desktop Configuration</h3>
+        <p>Add this configuration to your Claude Desktop config file:</p>
+        <pre><code>{
+  "mcpServers": {
+    "iia-resources": {
+      "command": "node",
+      "args": ["/path/to/mcp-bridge-standalone.js"],
+      "env": {
+        "IIA_API_BASE": "https://iia-mcp.vercel.app"
+      }
+    }
+  }
+}</code></pre>
+        
+        <h3>3. Configuration File Locations</h3>
+        <ul>
+            <li><strong>macOS:</strong> <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></li>
+            <li><strong>Windows:</strong> <code>%APPDATA%\Claude\claude_desktop_config.json</code></li>
+            <li><strong>Linux:</strong> <code>~/.config/claude_desktop_config.json</code></li>
+        </ul>
+        
+        <h3>4. Restart Claude Desktop</h3>
+        <p>After adding the configuration, restart Claude Desktop to load the MCP server.</p>
+        
+        <h3>5. Usage in Claude Desktop</h3>
+        <p>You can then ask Claude to:</p>
+        <ul>
+            <li>"Search IIA documents for risk management standards"</li>
+            <li>"Get details on IIA standard 2120"</li>
+            <li>"Validate this scenario against IIA standards: [your scenario]"</li>
+        </ul>
+    </div>
+
     <div class="footer">
         <p>🔗 <strong>IIA MCP Server</strong> - Deployed on Vercel | 
-        <a href="https://github.com/your-repo/iia-mcp-server" target="_blank">GitHub</a> | 
+        <a href="https://github.com/rp4/IIA-MCP" target="_blank">GitHub</a> | 
         <a href="https://www.theiia.org" target="_blank">IIA Official Site</a></p>
-        <p>For MCP integration, use this server as a resource provider in your Claude Code or other MCP-compatible tools.</p>
+        <p>For more detailed setup instructions, see the <a href="https://github.com/rp4/IIA-MCP/blob/main/SETUP_GUIDE.md" target="_blank">Setup Guide</a>.</p>
     </div>
 
     <script>
