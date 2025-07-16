@@ -1,17 +1,10 @@
 {
   "functions": {
     "api/**/*.ts": {
-      "runtime": "@vercel/node@3.0.31"
-    }
-  },
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "runtime": "@vercel/node"
     },
-    {
-      "src": "/",
-      "dest": "/public/index.html"
+    "api/**/*.js": {
+      "runtime": "@vercel/node"
     }
-  ]
+  }
 }
